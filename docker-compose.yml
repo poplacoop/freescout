@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  freescout-app:
+    image: tiredofit/freescout
+    container_name: freescout-app
+    ports:
+    - 8447:80
+    links:
+    - freescout-db
+    volumes:
+    - /home/docker/docker_freescout/data/:/data
+    - /home/docker/docker_freescout/logs/:/www/logs
+    environment:
+    - CONTAINER_NAME=freescout-app
+    
+    - DB_HOST=freescout-db
+    - DB_NAME=freescout
+    - DB_USER=freescout
+    - DB_PASS=freescout
+
+    - SITE_URL=http://146.59.199.185:8447/
+    - ADMIN_EMAIL=docker@poplasso.org
+    - ADMIN_PASS=freescout
+    - ENABLE_SSL_PROXY=TRUE
+    - DISPLAY_ERRORS=FALSE
+    - TIMEZONE=Europe/Brussels
+    restart: always
+
+  freescout-db:
+    image: tiredofit/mariadb
+    container_name: freescout-db
+    volumes:
+      - /home/docker/docker_freescout/db:/var/lib/mysql
+    environment:
+      - ROOT_PASS=password
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescout
+
+      - CONTAINER_NAME=freescout-db
+    restart: always
+
+  freescout-db-backup:
+    container_name: freescout-db-backup
+    image: tiredofit/db-backup
+    links:
+     - freescout-db
+    volumes:
+      - /home/docker/docker_freescout/dbbackup:/backup
+    environment:
+      - CONTAINER_NAME=freescout-db-backup
+      - DB_HOST=freescout-db
+      - DB_TYPE=mariadb
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescout
+      - DB01_BACKUP_INTERVAL=1440
+      - DB01_BACKUP_BEGIN=0000
+      - DB_CLEANUP_TIME=8640
+      - COMPRESSION=BZ
+      - MD5=TRUE
+    restart: always
+
