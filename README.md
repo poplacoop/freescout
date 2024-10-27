@@ -71,6 +71,13 @@ Creating freescout-db-backup ... done
 
 Il y a alors trois dockers qui tournent : un fresscout, un mariadb et un mariadb backup. Pas de conflit avec un mariadb local, les trois dockers communiquent uniquement entre eux.
 
+## Reverse Proxy
+Si le docker ne tourne pas en local, il faut le rendre visible de l'extérieur. Pour cela, il faut créer un nom avec le DNS associé à l'adresse URL paramétrée dans le docker compose.
+S'il s'agit d'une adresse en HTTPS, il faut aussi configurer le protocole SSL avec certbot :
+```
+sudo certbot --nginx -d freescout.poplacoop.fr
+```
+
 ## Connexion aux dockers
 Pour se connecter au dokers afin d'y effectuer des opérations de maintenances ou autres il faut commencer par afficher les dockers qui tournent :
 ```
