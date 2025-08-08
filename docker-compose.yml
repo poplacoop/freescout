@@ -19,9 +19,9 @@ services:
     - DB_USER=freescout
     - DB_PASS=freescout
 
-    - SITE_URL=http://146.59.199.185:8447/
-    - ADMIN_EMAIL=docker@poplasso.org
-    - ADMIN_PASS=freescout
+    - SITE_URL=https://freescout.poplacoop.fr
+    - ADMIN_EMAIL=adminfreescout@poplasso.org
+    - ADMIN_PASS=nNUrGwiQeSla3xYCL7ES
     - ENABLE_SSL_PROXY=TRUE
     - DISPLAY_ERRORS=FALSE
     - TIMEZONE=Europe/Brussels

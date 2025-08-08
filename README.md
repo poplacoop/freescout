@@ -17,20 +17,24 @@ sudo apt-get install docker docker-compose
 ```
 
 ## Installation
-Choisir l’endroit où cloner les fichiers du docker à partir de git (dans /home/debian/docker_freescout par exemple)
-Puis lancer la commande de clonage git (Les accès au git sont bien sûr nécéssaire):
+Vérifier que le répertoire /home/docker/docker_freescout existe, sinon le créer
+```
+mkdir /home/docker/docker_freescout
+```
+
+Puis lancer la commande de clonage git vers ce réperoire (Les accès au git sont bien sûr nécéssaire):
 - En SSH
 ```
-git clone git clone git@github.com:poplacoop/freescout.git NOM_REPERTOIRE
+git clone git clone git@github.com:poplacoop/freescout.git /home/docker/docker_freescout
 ```
 - En HTTPS
 ```
-git clone git clone https://github.com/poplacoop/freescout.git NOM_REPERTOIRE
+git clone git clone https://github.com/poplacoop/freescout.git /home/docker/docker_freescout
 ```
 
 Puis on rentre dans le répertoire cloné
 ```
-cd NOM_REPERTOIRE
+cd /home/docker/docker_freescout
 ```
 
 Les dockers sont installés et prêt à être lancés.
@@ -51,7 +55,7 @@ Les paramètres intéressants sont :
 - les différents nom de bases de données et identifiants de connexion.
 
 ## Lancement des dockers
-Le lancement des dockers se fait avec la commande suivante :
+Le lancement des dockers se fait depuis le répertoire /home/docker/docker_freescout avec la commande suivante :
 ```
 docker-compose up -d
 ```
@@ -69,7 +73,7 @@ Creating freescout-app       ... done
 Creating freescout-db-backup ... done
 ```
 
-Il y a alors trois dockers qui tournent : un fresscout, un mariadb et un mariadb backup. Pas de conflit avec un mariadb local, les trois dockers communiquent uniquement entre eux.
+Il y a alors trois dockers qui tournent : un fresscout, un mariadb et un mariadb backup (on peut le vérifier avec la commande docker ps). Pas de conflit avec un mariadb local, les trois dockers communiquent uniquement entre eux.
 
 ## Reverse Proxy
 Si le docker ne tourne pas en local, il faut le rendre visible de l'extérieur. Pour cela, il faut créer un nom avec le DNS associé à l'adresse URL paramétrée dans le docker compose.
@@ -90,7 +94,7 @@ docker exec -it "CONTAINER ID" bash
 On est alors directement connecté sur le docker comme utilisateur root.
 
 ## Arrête des dockers
-Pour arrêter les dockers il suffit de taper la commande :
+Pour arrêter les dockers il suffit de taper la commande depuis le répertoire /home/docker/docker_freescout:
 ```
 docker-compose down
 ```
