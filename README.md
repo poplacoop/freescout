@@ -82,6 +82,24 @@ S'il s'agit d'une adresse en HTTPS, il faut aussi configurer le protocole SSL av
 sudo certbot --nginx -d freescout.poplacoop.fr
 ```
 
+## Mise à jour des dockers
+Pour mettre à jour les dockers il faut se rendre dans le répertoire /home/docker/docker_freescout puis lancer trois commandes
+Une commande de téléchargement des dernières images :
+```
+docker-compose pull
+```
+
+Puis une commande pour arrêter les dockers :
+```
+docker-compose down
+```
+
+Et enfin une commande pour les relancer en mode détaché:
+```
+docker-compose up -d
+```
+
+
 ## Connexion aux dockers
 Pour se connecter au dokers afin d'y effectuer des opérations de maintenances ou autres il faut commencer par afficher les dockers qui tournent :
 ```
